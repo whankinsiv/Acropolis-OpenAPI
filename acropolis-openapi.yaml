@@ -1,0 +1,224 @@
+openapi: 3.0.4
+info:
+  title: Acropolis ~ API Documentation
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.1
+
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+  /accounts-state/stake:
+    get:
+      summary: Full stake state
+      description: Considering removal.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /accounts-state/stake/{stake_address}:
+    get:
+      summary: Specific account address
+      description: Returns information about a specific stake account.
+      parameters:
+      - in: path
+        name: stake_address
+        required: true
+        schema:
+          type: string
+        description: Bech32-encoded Cardano stake address to query.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /spdd:
+    get:
+      summary: Pool delegation distribution.
+      description: Returns the current stake pool delegation distribution.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /drdd:
+    get:
+      summary: DRep delegation distribution.
+      description: Returns the current DRep delegation distribution.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /pots:
+    get:
+      summary: Pot balances.
+      description: Returns the current treasury, reserve, and deposit pot balances
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /drep-state/list:
+    get:
+      summary: Active DReps
+      description: Returns the active DReps.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /drep-state/drep/{drep_id}:
+    get:
+      summary: Specific DRep
+      description: Returns information about a specific DRep.
+      parameters:
+      - in: path
+        name: drep_id
+        required: true
+        schema:
+          type: string
+        description: Bech32-encoded DRep ID to query.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /governance-state/list:
+    get:
+      summary: Active proposals
+      description: Returns the currently active governance actions. 
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /governance-state/proposal/{proposal_id}:
+    get:
+      summary: Specific proposal
+      description: Returns information about a specific active proposal.
+      parameters:
+      - in: path
+        name: proposal_id
+        required: true
+        schema:
+          type: string
+        description: Bech32-encoded governance proposal (GovActionId) to query.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /governance-state/proposal/{proposal_id}/votes:
+    get:
+      summary: Proposal votes
+      description: Returns voting information about a specific active proposal.
+      parameters:
+      - in: path
+        name: proposal_id
+        required: true
+        schema:
+          type: string
+        description: Bech32-encoded governance proposal (GovActionId) to query.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /spo-state:
+    get:
+      summary: Full SPO state
+      description: Considering removal.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string                  
+  /spo-state/{pool_id}:
+    get:
+      summary: Specific stake pool
+      description: Returns information about a specific stake pool.
+      parameters:
+      - in: path
+        name: pool_id
+        required: true
+        schema:
+          type: string
+        description: Hex stake pool ID to query.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string             
+  /utxo-state/{tx_hash:index}:
+    get:
+      summary: UTxO balance.
+      description: Returns the balance of a specific UTxO
+      parameters:
+      - in: path
+        name: tx_hash:index
+        required: true
+        schema:
+          type: string
+        description: Transaction hash and output index in the form `tx_hash:index`, identifying the specific UTxO to query.
+      responses:
+        "200": # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string                               
